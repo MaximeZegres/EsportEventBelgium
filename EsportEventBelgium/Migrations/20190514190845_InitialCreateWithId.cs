@@ -1,9 +1,10 @@
 ﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace EsportEventBelgium.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class InitialCreateWithId : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,7 +12,8 @@ namespace EsportEventBelgium.Migrations
                 name: "Organizations",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true),
                     UrlWebsite = table.Column<string>(nullable: true)
                 },
@@ -24,10 +26,11 @@ namespace EsportEventBelgium.Migrations
                 name: "Events",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
-                    OrganizationId = table.Column<Guid>(nullable: true),
+                    OrganizationId = table.Column<int>(nullable: true),
                     BeginDate = table.Column<DateTime>(nullable: false),
                     EndDate = table.Column<DateTime>(nullable: false)
                 },
@@ -46,10 +49,11 @@ namespace EsportEventBelgium.Migrations
                 name: "Games",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true),
                     Genre = table.Column<string>(nullable: true),
-                    EventId = table.Column<Guid>(nullable: true)
+                    EventId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {

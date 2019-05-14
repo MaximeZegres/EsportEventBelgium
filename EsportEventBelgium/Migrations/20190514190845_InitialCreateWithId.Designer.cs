@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EsportEventBelgium.Migrations
 {
     [DbContext(typeof(EsportEventContext))]
-    [Migration("20190514141253_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20190514190845_InitialCreateWithId")]
+    partial class InitialCreateWithId
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,8 +23,9 @@ namespace EsportEventBelgium.Migrations
 
             modelBuilder.Entity("EsportEventBelgium.Entities.Event", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("BeginDate");
 
@@ -34,7 +35,7 @@ namespace EsportEventBelgium.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<Guid?>("OrganizationId");
+                    b.Property<int?>("OrganizationId");
 
                     b.HasKey("Id");
 
@@ -45,10 +46,11 @@ namespace EsportEventBelgium.Migrations
 
             modelBuilder.Entity("EsportEventBelgium.Entities.Game", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<Guid?>("EventId");
+                    b.Property<int?>("EventId");
 
                     b.Property<string>("Genre");
 
@@ -63,8 +65,9 @@ namespace EsportEventBelgium.Migrations
 
             modelBuilder.Entity("EsportEventBelgium.Entities.Organization", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name");
 
