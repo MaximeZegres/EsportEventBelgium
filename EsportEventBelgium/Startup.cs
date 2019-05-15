@@ -51,6 +51,13 @@ namespace EsportEventBelgium
                 app.UseHsts();
             }
 
+            AutoMapper.Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<Entities.Organization, Models.OrganizationDTO>();
+            });
+
+
+
             app.UseHttpsRedirection();
             app.UseMvc();
         }
