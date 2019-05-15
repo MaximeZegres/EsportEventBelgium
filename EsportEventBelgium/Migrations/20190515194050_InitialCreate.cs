@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace EsportEventBelgium.Migrations
 {
-    public partial class InitialCreateWithId : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -52,29 +52,13 @@ namespace EsportEventBelgium.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true),
-                    Genre = table.Column<string>(nullable: true),
-                    EventId = table.Column<int>(nullable: true)
+                    Genre = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Games", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Games_Events_EventId",
-                        column: x => x.EventId,
-                        principalTable: "Events",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Events_OrganizationId",
-                table: "Events",
-                column: "OrganizationId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Games_EventId",
-                table: "Games",
-                column: "EventId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

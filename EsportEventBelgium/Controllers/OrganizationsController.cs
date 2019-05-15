@@ -19,23 +19,30 @@ namespace EsportEventBelgium.Controllers
             _esportEventRepository = esportEventRepository;
         }
 
+
         [HttpGet]
         public IActionResult GetOrganizations()
         {
             var organizationsFromRepo = _esportEventRepository.GetOrganizations();
             var organizations = Mapper.Map<IEnumerable<OrganizationDTO>>(organizationsFromRepo);
 
-            return new JsonResult(organizations);
+            return Ok(organizations);
         }
 
         [HttpGet("id")]
         public IActionResult GetOrganization(int id)
         {
+
             var organizationFromRepo = _esportEventRepository.GetOrganization(id);
+            
+            if(organizationFromRepo == null)
+            {
+                return NotFound();
+            }
+
 
             var organization = Mapper.Map<OrganizationDTO>(organizationFromRepo);
-
-            return new JsonResult(organization);
+            return Ok(organization);
         }
 
     }

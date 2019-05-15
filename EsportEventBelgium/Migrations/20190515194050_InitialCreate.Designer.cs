@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EsportEventBelgium.Migrations
 {
     [DbContext(typeof(EsportEventContext))]
-    [Migration("20190514190845_InitialCreateWithId")]
-    partial class InitialCreateWithId
+    [Migration("20190515194050_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
