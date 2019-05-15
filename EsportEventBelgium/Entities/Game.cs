@@ -9,7 +9,7 @@ namespace EsportEventBelgium.Entities
     public class Game
     {
         [Key]
-        public int Id { get; set; }
+        public int GameId { get; set; }
         public string Name { get; set; }
         public string Genre { get; set; } // FPS, MOBA, etc...
     }

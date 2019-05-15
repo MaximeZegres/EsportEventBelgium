@@ -20,6 +20,8 @@ namespace EsportEventBelgium.Services
         Event GetEvent(int id);
         void AddEvent(Event esportEvent);
         void DeleteEvent(Event esportEvent);
+        IEnumerable<Event> GetEventsForOrganization(int organizationId);
+        Event GetEventForOrganizationById(int organizationId, int eventId);
 
         // Game
         IEnumerable<Game> GetGames();

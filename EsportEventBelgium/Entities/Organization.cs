@@ -9,7 +9,7 @@ namespace EsportEventBelgium.Entities
     public class Organization
     {
         [Key]
-        public int Id { get; set; }
+        public int OrganizationId { get; set; }
         public string Name { get; set; }
         public string UrlWebsite { get; set; }
         public ICollection<Event> Events { get; set; } = new List<Event>();

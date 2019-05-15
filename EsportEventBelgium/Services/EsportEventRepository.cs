@@ -23,7 +23,7 @@ namespace EsportEventBelgium.Services
 
         public Organization GetOrganization(int id)
         {
-            return _context.Organizations.FirstOrDefault(o => o.Id == id);
+            return _context.Organizations.FirstOrDefault(o => o.OrganizationId == id);
         }
 
         public void AddOrganization(Organization organization)
@@ -46,7 +46,7 @@ namespace EsportEventBelgium.Services
 
         public Event GetEvent(int id)
         {
-            return _context.Events.FirstOrDefault(o => o.Id == id);
+            return _context.Events.FirstOrDefault(o => o.EventId == id);
         }
 
         public void AddEvent(Event esportEvent)
@@ -59,6 +59,15 @@ namespace EsportEventBelgium.Services
             _context.Events.Remove(esportEvent);
         }
 
+        public IEnumerable<Event> GetEventsForOrganization(int organizationId)
+        {
+            return _context.Events.Where(e => e.Organization.OrganizationId == organizationId).OrderBy(e => e.BeginDate).ToList();
+        }
+
+        public Event GetEventForOrganizationById(int organizationId, int eventId)
+        {
+            return _context.Events.Where(e => e.Organization.OrganizationId == organizationId && e.EventId == eventId).FirstOrDefault();
+        }
 
 
 
@@ -69,7 +78,7 @@ namespace EsportEventBelgium.Services
 
         public Game GetGame(int id)
         {
-            return _context.Games.FirstOrDefault(o => o.Id == id);
+            return _context.Games.FirstOrDefault(o => o.GameId == id);
         }
 
         public void AddGame(Game game)

@@ -23,26 +23,40 @@ namespace EsportEventBelgium.Controllers
         [HttpGet]
         public IActionResult GetOrganizations()
         {
-            var organizationsFromRepo = _esportEventRepository.GetOrganizations();
-            var organizations = Mapper.Map<IEnumerable<OrganizationDTO>>(organizationsFromRepo);
+            try
+            {
+                var organizationsFromRepo = _esportEventRepository.GetOrganizations();
+                var organizations = Mapper.Map<IEnumerable<OrganizationDTO>>(organizationsFromRepo);
 
-            return Ok(organizations);
+                return Ok(organizations);
+            } catch (Exception)
+            {
+                return StatusCode(500, "Unexpected fault happened. Try again later.");
+            }
+            
         }
 
         [HttpGet("id")]
         public IActionResult GetOrganization(int id)
         {
-
-            var organizationFromRepo = _esportEventRepository.GetOrganization(id);
-            
-            if(organizationFromRepo == null)
+            try
             {
-                return NotFound();
+                var organizationFromRepo = _esportEventRepository.GetOrganization(id);
+
+                if (organizationFromRepo == null)
+                {
+                    return NotFound();
+                }
+
+
+                var organization = Mapper.Map<OrganizationDTO>(organizationFromRepo);
+                return Ok(organization);
+
+            } catch (Exception)
+            {
+                return StatusCode(500, "Unexpected fault happened. Try again later.");
             }
-
-
-            var organization = Mapper.Map<OrganizationDTO>(organizationFromRepo);
-            return Ok(organization);
+            
         }
 
     }

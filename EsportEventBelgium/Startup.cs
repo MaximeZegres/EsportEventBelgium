@@ -54,6 +54,8 @@ namespace EsportEventBelgium
             AutoMapper.Mapper.Initialize(cfg =>
             {
                 cfg.CreateMap<Entities.Organization, Models.OrganizationDTO>();
+
+                cfg.CreateMap<Entities.Event, Models.EventDTO>();
             });
 
 
