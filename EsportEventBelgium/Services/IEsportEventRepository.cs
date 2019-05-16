@@ -28,5 +28,7 @@ namespace EsportEventBelgium.Services
         Game GetGame(int id);
         void AddGame(Game game);
         void DeleteGame(Game game);
+
+        bool Save();
     }
 }

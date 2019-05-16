@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using EsportEventBelgium.Entities;
 using EsportEventBelgium.Models;
 using EsportEventBelgium.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -36,7 +37,7 @@ namespace EsportEventBelgium.Controllers
             
         }
 
-        [HttpGet("id")]
+        [HttpGet("{id}", Name = "GetOrganization")]
         public IActionResult GetOrganization(int id)
         {
             try
@@ -55,9 +56,34 @@ namespace EsportEventBelgium.Controllers
             } catch (Exception)
             {
                 return StatusCode(500, "Unexpected fault happened. Try again later.");
-            }
-            
+            }         
         }
+
+
+        [HttpPost]
+        public IActionResult CreateOrganization([FromBody] OrganizationForCreationDTO organization)
+        {
+            if (organization == null)
+            {
+                return BadRequest();
+            }
+
+            var organizationEntity = Mapper.Map<Organization>(organization);
+
+            _esportEventRepository.AddOrganization(organizationEntity);
+
+            if (!_esportEventRepository.Save())
+            {
+                return StatusCode(500, "Unexpected fault happened. Try again later.");
+            }
+
+            var organizationToReturn = Mapper.Map<OrganizationDTO>(organizationEntity);
+
+            return CreatedAtRoute("GetOrganization",
+                                  new { id = organizationToReturn.Id },
+                                  organizationToReturn);
+        }
+
 
     }
 }

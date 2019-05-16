@@ -91,6 +91,9 @@ namespace EsportEventBelgium.Services
             _context.Games.Remove(game);
         }
 
-
+        public bool Save()
+        {
+            return (_context.SaveChanges() >= 0);
+        }
     }
 }
